@@ -20,12 +20,6 @@ return require('packer').startup(function(use)
 		  vim.cmd('colorscheme rose-pine')
 	  end
   })
-    use({
-        'barrett-ruth/live-server.nvim',
-        build = 'pnpm add -g live-server',
-        cmd = { 'LiveServerStart', 'LiveServerStop' },
-        config = true
-    })
     use('hrsh7th/nvim-cmp')
     use('onsails/lspkind.nvim')
     use('hrsh7th/cmp-nvim-lsp')
