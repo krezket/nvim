@@ -13,20 +13,23 @@ return require('packer').startup(function(use)
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  use ({
+  use ({{
+	  'rose-pine/neovim',
+	  as = 'rose-pine',
+	  config = function()
+		  vim.cmd('colorscheme rose-pine')
+	  end
+  }
 	  'rose-pine/neovim',
 	  as = 'rose-pine',
 	  config = function()
 		  vim.cmd('colorscheme rose-pine')
 	  end
   })
-    use('hrsh7th/nvim-cmp')
-    use('onsails/lspkind.nvim')
-    use('hrsh7th/cmp-nvim-lsp')
-    use('hrsh7th/cmp-path')
-    use('hrsh7th/cmp-buffer')
-    use({'L3MON4D3/LuaSnip', build= 'make install_jsregexp'})
-    use('saadparwaiz1/cmp_luasnip')
+
+  use{'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
+      'neovim/nvim-lspconfig'}
 
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use('nvim-treesitter/playground')
