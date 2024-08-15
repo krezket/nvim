@@ -19,13 +19,7 @@ return require('packer').startup(function(use)
 	  config = function()
 		  vim.cmd('colorscheme rose-pine')
 	  end
-  }
-	  'rose-pine/neovim',
-	  as = 'rose-pine',
-	  config = function()
-		  vim.cmd('colorscheme rose-pine')
-	  end
-  })
+  }})
 
   use{'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
