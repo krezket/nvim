@@ -1,0 +1,5 @@
+return {
+    {
+        'alvan/vim-closetag',
+    }
+}

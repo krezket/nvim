@@ -22,6 +22,49 @@ return {
         end,
     },
     -- {
+    --     "ellisonleao/gruvbox.nvim",
+    --     name = "gruvbox",
+    --     config = function()
+    --         vim.cmd('colorscheme gruvbox')
+    --         vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    --         vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    --     end,
+    -- },
+    --
+    {
+        "HoNamDuong/hybrid.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+        config = function()
+            vim.cmd('colorscheme hybrid')
+            vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+            require("hybrid").setup({
+                transparent = true,
+            })
+        end,
+    },
+    --
+    -- {
+    --     "miikanissi/modus-themes.nvim", priority = 1000,
+    --     config = function()
+    --         vim.cmd('colorscheme modus')
+    --         vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    --         vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    --     end,
+    -- },
+    -- {
+    --     "erikbackman/brightburn.vim",
+    --     config = function()
+    --         vim.cmd('colorscheme brightburn')
+    --         vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    --         vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    --     end
+    -- },
+    --
+    --
+    -- {
     --     'rose-pine/neovim',
     --     name = 'rose-pine',
     --     config = function()
@@ -29,4 +72,3 @@ return {
     --     end
     -- },
 }
-
