@@ -12,7 +12,7 @@ return {
             vim.wo.wrap = false
             vim.wo.number = true
             vim.wo.rnu = true
-            ColorMyPencils()
+            -- ColorMyPencils()
         end)
 
 
@@ -28,7 +28,7 @@ return {
             vim.wo.number = true
             vim.wo.rnu = true
             vim.opt.colorcolumn = "0"
-            ColorMyPencils()
+            -- ColorMyPencils()
         end)
     end
 }

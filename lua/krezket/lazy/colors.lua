@@ -8,6 +8,18 @@ end
 
 return {
     {
+        "Mofiqul/vscode.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+        config = function()
+            require("vscode").setup({
+                vim.cmd('colorscheme vscode'),
+                transparent = true
+            })
+        end
+    },
+    {
         "HoNamDuong/hybrid.nvim",
         lazy = false,
         priority = 1000,

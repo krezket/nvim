@@ -22,17 +22,41 @@ return {
         end,
     },
     {
-        "HoNamDuong/hybrid.nvim",
+        "Mofiqul/vscode.nvim",
         lazy = false,
         priority = 1000,
         opts = {},
         config = function()
-            require("hybrid").setup({
-                vim.cmd('colorscheme hybrid'),
+            require("vscode").setup({
+                vim.cmd('colorscheme vscode'),
                 transparent = true
             })
-        end,
+        end
     },
+    -- {
+    --     "HoNamDuong/hybrid.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    --     config = function()
+    --         require("hybrid").setup({
+    --             vim.cmd('colorscheme hybrid'),
+    --             transparent = true
+    --         })
+    --     end,
+    -- },
+    -- {
+    --     "fneu/breezy.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    --     config = function()
+    --         require("hybrid").setup({
+    --             vim.cmd('colorscheme breezy'),
+    --             transparent = true
+    --         })
+    --     end
+    -- },
     -- {
     --     'rose-pine/neovim',
     --     name = 'rose-pine',
