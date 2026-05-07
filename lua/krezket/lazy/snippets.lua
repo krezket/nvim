@@ -27,18 +27,18 @@ return {
             end, {silent = true})
         end,
     },
-    {
-        "eldritch-theme/eldritch.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {},
-        config = function()
-            require("eldritch").setup({
-                vim.cmd('colorscheme eldritch'),
-                transparent = true
-            })
-        end
-    }
+    -- {
+    --     "eldritch-theme/eldritch.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    --     config = function()
+    --         require("eldritch").setup({
+    --             vim.cmd('colorscheme eldritch'),
+    --             transparent = true
+    --         })
+    --     end
+    -- }
     -- {
     --     "Mofiqul/vscode.nvim",
     --     lazy = false,
@@ -75,12 +75,12 @@ return {
     --         })
     --     end
     -- },
-    -- {
-    --     'rose-pine/neovim',
-    --     name = 'rose-pine',
-    --     config = function()
-    --         vim.cmd('colorscheme rose-pine')
-    --     end
-    -- },
+    {
+        'rose-pine/neovim',
+        name = 'rose-pine',
+        config = function()
+            vim.cmd('colorscheme rose-pine')
+        end
+    },
 }
 
