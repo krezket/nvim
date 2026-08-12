@@ -1,29 +1,43 @@
 return {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
-    },
-    config = function()
-        -- 1. Initialize Mason first
-        require("mason").setup()
+        "neovim/nvim-lspconfig",
+        dependencies = {
+                "williamboman/mason.nvim",
+                "williamboman/mason-lspconfig.nvim",
+        },
+        config = function()
+                local lspconfig = require("lspconfig")
+                -- 1. Initialize Mason first
+                require("mason").setup()
 
-        -- 2. Configure mason-lspconfig with handlers built-in
-        require("mason-lspconfig").setup({
-            -- Add every language you ever anticipate touching
-            ensure_installed = {
-                "ts_ls", "pyright", "gopls",
-                "html", "cssls", "jsonls", "yamlls", "lua_ls", "bashls"
-            },
-            automatic_installation = true, -- Automatically install LSPs for new filetypes you open
+                -- 2. Configure mason-lspconfig with handlers built-in
+                require("mason-lspconfig").setup({
+                        -- Add every language you ever anticipate touching
+                        ensure_installed = {
+                                "ts_ls", "pyright", "gopls",
+                                "html", "cssls", "jsonls", "yamlls", "lua_ls", "bashls"
+                        },
+                        automatic_installation = true, -- Automatically install LSPs for new filetypes you open
 
-            handlers = {
-                function(server_name)
-                    require("lspconfig")[server_name].setup({})
-                end,
-            },
-        })
-    end,
+                        handlers = {
+                                function(server_name)
+                                        require("lspconfig")[server_name].setup({})
+                                end,
+
+                                ["css_variables"] = function()
+                                        lspconfig.css_variables.setup({
+                                                root_dir = function(fname)
+                                                        local root = lspconfig.util.root_pattern("package.json", ".git")(
+                                                                fname)
+                                                        if root and root ~= vim.env.HOME then
+                                                                return root
+                                                        end
+                                                        return nil
+                                                end,
+                                        })
+                                end,
+                        },
+                })
+        end,
 }
 -- return {
 --     "neovim/nvim-lspconfig",
