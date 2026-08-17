@@ -1,6 +1,6 @@
 --[[
 
-=====================================================================
+======================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
 ========                                    .-----.          ========
@@ -92,6 +92,22 @@ do
   -- Enable faster startup by caching compiled Lua modules
   vim.loader.enable()
 
+  vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+  vim.opt.nu = true
+  vim.opt.relativenumber = true
+  vim.opt.expandtab = true
+  vim.opt.smartindent = true
+  vim.opt.wrap = false
+  vim.opt.clipboard:append { 'unnamedplus' }
+  vim.opt.hlsearch = false
+  vim.opt.incsearch = true
+  vim.opt.termguicolors = true
+  vim.opt.scrolloff = 10
+  vim.opt.signcolumn = "yes"
+  vim.opt.isfname:append("@-@")
+  vim.opt.updatetime = 50
+
+  vim.g.mapleader = " "
   -- Set <space> as the leader key
   -- See `:help mapleader`
   --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -105,7 +121,7 @@ do
   --  See `:help vim.o`
   -- NOTE: You can change these options as you wish!
   --  For more options, you can see `:help option-list`
-
+  vim.opt.guicursor = ""
   -- Make line numbers default
   vim.o.number = true
   -- You can also add relative line numbers, to help with jumping.
@@ -156,8 +172,6 @@ do
   --   See `:help lua-options`
   --   and `:help lua-guide-options`
   vim.o.list = true
-  vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-
   -- Preview substitutions live, as you type!
   vim.o.inccommand = 'split'
 
@@ -180,10 +194,8 @@ end
 do
   -- [[ Basic Keymaps ]]
   --  See `:help vim.keymap.set()`
-
-  -- Clear highlights on search when pressing <Esc> in normal mode
   --  See `:help hlsearch`
-  vim.g.mapleader = " "
+  --
   vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
   -- Moving Selected Lines in Visual Mode
@@ -350,21 +362,58 @@ do
   -- [[ Installing and Configuring Plugins ]]
   --
   -- To install a plugin simply call `vim.pack.add` with its git url.
-  -- This will download the default branch of the plugin, which will usually be `main` or `master`
-  -- You can also have more advanced specs, which we will talk about later.
-  --
-  -- For most plugins its not enough to install them, you also need to call their `.setup()` to start them.
-  --
-  -- For example, lets say we want to install `guess-indent.nvim` - a plugin for
-  -- automatically detecting and setting the indentation.
-  --
-  -- We first install it from https://github.com/NMAC427/guess-indent.nvim
-  -- and then call its `setup()` function to start it with default settings.
+
+  -- 1. Load the transparent plugin
+  vim.pack.add { gh 'xiyaowong/transparent.nvim' }
+
+  -- 2. Setup the plugin
+  require("transparent").setup({
+    -- Optional: You can add extra groups here if a specific menu still has a background
+    extra_groups = {
+      "NormalFloat",     -- Clear floating windows (like Harpoon)
+      "NvimTreeNormal",  -- Clear NvimTree background (if you use it)
+    },
+  })
+  -- 1. Load plugins in a single valid list
+  vim.pack.add({
+    gh 'nvim-lua/plenary.nvim',
+    { src = gh 'ThePrimeagen/harpoon', branch = "harpoon2" }
+  })
+
+  -- 2. Initialize Harpoon
+  local harpoon = require("harpoon")
+  harpoon:setup()
+
+  -- 3. Set your keymaps
+  vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+  vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+  vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+  vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
+  vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
+  vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
+
+  -- Toggle previous & next buffers stored within Harpoon list
+  vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+  vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+  -- Toggle previous & next buffers stored within Harpoon list
+  vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+  vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+  -- Toggle previous & next buffers stored within Harpoon list
+  vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+  vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+
+  -- Autopairs
+  vim.pack.add { gh 'windwp/nvim-autopairs' }
+
+  local autopairs = require("nvim-autopairs")
+
+  autopairs.setup({
+    check_ts = true, 
+  })
   vim.pack.add { gh 'NMAC427/guess-indent.nvim' }
   require('guess-indent').setup {}
 
-  -- Here is a more advanced configuration example that passes options to `gitsigns.nvim`
-  --
   -- See `:help gitsigns` to understand what each configuration key does.
   -- Adds git related signs to the gutter, as well as utilities for managing changes
   vim.pack.add { gh 'lewis6991/gitsigns.nvim' }
