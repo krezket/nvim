@@ -362,6 +362,18 @@ do
   -- [[ Installing and Configuring Plugins ]]
   --
   -- To install a plugin simply call `vim.pack.add` with its git url.
+  -- 1. Load the plugin
+  vim.pack.add { gh 'windwp/nvim-ts-autotag' }
+  require('nvim-ts-autotag').setup({
+    opts = {
+      -- Defaults
+      enable_close = true,          -- Auto close tags
+      enable_rename = true,         -- Auto rename pairs of tags
+      enable_close_on_slash = false -- Auto close on trailing </
+    }
+  })
+
+  --
   vim.pack.add { gh 'barrettruth/live-server.nvim' }
   -- 1. Load the transparent plugin
   vim.pack.add { gh 'xiyaowong/transparent.nvim' }
