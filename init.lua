@@ -360,13 +360,25 @@ local function gh(repo) return 'https://github.com/' .. repo end
 -- ============================================================
 do
   -- [[ Installing and Configuring Plugins ]]
-  --
   -- To install a plugin simply call `vim.pack.add` with its git url.
-  -- 1. Load the plugin
+  --
+  vim.pack.add { gh 'supermaven-inc/supermaven-nvim' }
+
+  require("supermaven-nvim").setup({
+    keymaps = {
+      accept_suggestion = "<Tab>", -- Press Tab to insert the guessed text
+      clear_suggestion = "<C-]>",  -- Press Ctrl+] to dismiss the guess
+      accept_word = "<C-w>",       -- Accept just the next word instead of full line
+    },
+    ignore_filetypes = {},
+    color = {
+      suggestion_color = "#808080", -- Color of the ghost text
+      cterm = 244,
+    },
+  })
   vim.pack.add { gh 'windwp/nvim-ts-autotag' }
   require('nvim-ts-autotag').setup({
     opts = {
-      -- Defaults
       enable_close = true,          -- Auto close tags
       enable_rename = true,         -- Auto rename pairs of tags
       enable_close_on_slash = false -- Auto close on trailing </
